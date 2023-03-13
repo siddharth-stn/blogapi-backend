@@ -7,3 +7,11 @@ exports.bpost_get = (req, res, next) => {
 exports.bpost_post = (req, res, next) => {
   res.send("NOT IMPLEMENTED: create bpost POST");
 };
+
+exports.bpost_put_publish = (req, res, next) => {
+  res.send("NOT IMPLEMENTED: publish bpost on PUT");
+};
+
+exports.bpost_put_unpublish = (req, res, next) => {
+  res.send("NOT IMPLEMENTED: unpublish bpost on PUT");
+};
