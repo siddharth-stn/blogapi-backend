@@ -7,6 +7,7 @@ const BpostSchema = new Schema({
   title: { type: String, required: true, minLength: 1 },
   text: { type: String, required: true, minLength: 1 },
   date: { type: Date, required: true, default: Date.now },
+  isPublish: { type: Boolean, default: false, required: true },
 });
 
 BpostSchema.virtual("url").get(function () {
