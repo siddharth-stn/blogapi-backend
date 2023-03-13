@@ -16,8 +16,8 @@ const main = async () => {
 main().catch((err) => console.log(err));
 /////////////////////////////////////////
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const privateRouter = require("./routes/private");
+const publicRouter = require("./routes/public");
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/private", privateRouter);
+app.use("/public", publicRouter);
 
 module.exports = app;
