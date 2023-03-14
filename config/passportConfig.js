@@ -1,7 +1,10 @@
-const passport = require("passport");
+require("dotenv").config();
 const LocalStrategy = require("passport-local").Strategy;
 const Author = require("../models/author");
 const bcrypt = require("bcryptjs");
+const passportJWT = require("passport-jwt");
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
 
 const initialize = (passport) => {
   passport.use(
@@ -27,6 +30,22 @@ const initialize = (passport) => {
             });
           })
           .catch((err) => done(err));
+      }
+    )
+  );
+
+  passport.use(
+    new JWTStrategy(
+      {
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,
+        secretOrKey: process.env.SECRET_KEY,
+      },
+      (jwtPayload, done) => {
+        return Author.findById(jwtPayload.id)
+          .then((user) => {
+            return done(null, user);
+          })
+          .catch((err) => done);
       }
     )
   );
