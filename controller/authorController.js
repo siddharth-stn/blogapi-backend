@@ -15,10 +15,10 @@ exports.author_login_post = (req, res, next) => {
     }
     req.login(user, { session: false }, (err) => {
       if (err) {
-        res.json(err);
+        res.json({ err });
       }
       const token = jwt.sign(user, SECRET_KEY);
-      return res.json({ user, token });
+      return res.json({ token });
     });
   })(req, res, next);
 };
