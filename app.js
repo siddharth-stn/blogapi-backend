@@ -36,8 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/login", loginRouter);
 app.use(
   "/private",
-  passport.authenticate("jwt", { session: false }, user),
-  privateRouter
+  passport.authenticate("jwt", { session: false }, privateRouter)
 );
 app.use("/public", publicRouter);
 
