@@ -1,9 +1,24 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const Author = require("../models/author");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = process.env.SECRET_KEY;
 
 exports.author_login_post = (req, res, next) => {
-  // let { email, password } = req.body;
-  // Author.find({ username: email })
-  //   .then((author) => {})
-  //   .catch((err) => next(err));
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    if (err || !user) {
+      return res.status(400).json({
+        message: "Something is not working",
+        user,
+      });
+    }
+    req.login(user, { session: false }, (err) => {
+      if (err) {
+        res.json(err);
+      }
+      const token = jwt.sign(user, SECRET_KEY);
+      return res.json({ user, token });
+    });
+  })(req, res, next);
 };
