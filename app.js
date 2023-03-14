@@ -16,6 +16,11 @@ const main = async () => {
 main().catch((err) => console.log(err));
 /////////////////////////////////////////
 
+//Initialize passport
+const passport = require("passport");
+const initialize = require("./config/passportConfig");
+initialize(passport);
+
 const privateRouter = require("./routes/private");
 const publicRouter = require("./routes/public");
 
