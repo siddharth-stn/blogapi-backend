@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-
-exports.author_login_get = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: login on GET");
-};
+const Author = require("../models/author");
 
 exports.author_login_post = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: login on POST");
+  // let { email, password } = req.body;
+  // Author.find({ username: email })
+  //   .then((author) => {})
+  //   .catch((err) => next(err));
 };
