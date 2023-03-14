@@ -34,7 +34,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/login", loginRouter);
-app.use("/private", privateRouter);
+app.use(
+  "/private",
+  passport.authenticate("jwt", { session: false }, user),
+  privateRouter
+);
 app.use("/public", publicRouter);
 
 module.exports = app;
