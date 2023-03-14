@@ -1,6 +1,4 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
-const Author = require("../models/author");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
