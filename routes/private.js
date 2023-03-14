@@ -4,8 +4,7 @@ const router = express.Router();
 const authorController = require("../controller/authorController");
 const bpostController = require("../controller/bpostController");
 
-router.get("/login", authorController.author_login_get);
-
+//Login as an Author of the Blog to write posts
 router.post("/login", authorController.author_login_post);
 
 //Create Blog-post (works only when authenticated)
