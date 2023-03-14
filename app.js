@@ -21,6 +21,7 @@ const passport = require("passport");
 const initialize = require("./config/passportConfig");
 initialize(passport);
 
+const loginRouter = require("./routes/login");
 const privateRouter = require("./routes/private");
 const publicRouter = require("./routes/public");
 
@@ -32,6 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/login", loginRouter);
 app.use("/private", privateRouter);
 app.use("/public", publicRouter);
 
