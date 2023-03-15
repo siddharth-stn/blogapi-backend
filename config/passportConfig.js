@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const Author = require("../models/author");
 const bcrypt = require("bcryptjs");
 const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
+const JwtStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
 const initialize = (passport) => {
@@ -24,7 +24,6 @@ const initialize = (passport) => {
                 return done(err);
               }
               if (!isMatch) {
-                console.log("I am here");
                 return done(null, false, { message: "Wrong Password!" });
               }
               return done(null, user, { message: "Logged in Successfully" });
@@ -36,12 +35,13 @@ const initialize = (passport) => {
   );
 
   passport.use(
-    new JWTStrategy(
+    new JwtStrategy(
       {
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.SECRET_KEY,
       },
       (jwtPayload, done) => {
+        console.log("This");
         return Author.findById(jwtPayload.id)
           .then((user) => {
             return done(null, user);

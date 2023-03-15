@@ -5,6 +5,7 @@ exports.bpost_get = (req, res, next) => {
 };
 
 exports.bpost_post = (req, res, next) => {
+  console.log("In the controller");
   res.send("NOT IMPLEMENTED: create bpost POST");
 };
 
