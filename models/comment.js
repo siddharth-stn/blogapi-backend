@@ -6,7 +6,7 @@ const CommentSchema = new Schema({
   text: { type: String, required: true, minLength: 1 },
   name: { type: String, required: true, minLength: 1 },
   date: { type: Date, required: true, default: date.now },
-  bpost: { type: Schema.Types.ObjectId, ref: "BPOST" },
+  bpost: { type: Schema.Types.ObjectId, ref: "Bpost" },
 });
 
 CommentSchema.virtual("url").get(function () {
@@ -19,4 +19,4 @@ CommentSchema.virtual("date_formatted").get(function () {
     .toLocaleString(DateTime.DATE_SHORT);
 });
 
-module.exports = mongoose.model("COMMENT", CommentSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

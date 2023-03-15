@@ -13,7 +13,9 @@ const main = async () => {
   await mongoose.connect(MONGO_DB);
 };
 
-main().catch((err) => console.log(err));
+main()
+  .then(() => console.log("connected to the database"))
+  .catch((err) => console.log(err));
 /////////////////////////////////////////
 
 //Initialize passport
@@ -32,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(passport.initialize());
 
 app.use("/login", loginRouter);
 app.use(

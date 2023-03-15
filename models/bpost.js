@@ -20,4 +20,4 @@ BpostSchema.virtual("date_formatted").get(function () {
     .toLocaleString(DateTime.DATE_SHORT);
 });
 
-module.exports = mongoose.model("BPOST", BpostSchema);
+module.exports = mongoose.model("Bpost", BpostSchema);

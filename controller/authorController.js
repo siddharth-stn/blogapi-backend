@@ -5,9 +5,15 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 exports.author_login_post = (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user, info) => {
-    if (err || !user) {
+    if (err) {
       return res.status(400).json({
         message: "Something is not working",
+        user,
+      });
+    }
+    if (!user) {
+      return res.status(400).json({
+        message: "User not found",
         user,
       });
     }
@@ -15,7 +21,7 @@ exports.author_login_post = (req, res, next) => {
       if (err) {
         res.json({ err });
       }
-      const token = jwt.sign(user, SECRET_KEY);
+      const token = jwt.sign(user.toJSON(), SECRET_KEY);
       return res.json({ token });
     });
   })(req, res, next);

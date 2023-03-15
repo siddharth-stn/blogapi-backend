@@ -19,11 +19,12 @@ const initialize = (passport) => {
             if (!user) {
               return done(null, false, { message: "User not found" });
             }
-            bcrypt.compare(user.password, password, (err, isMatch) => {
+            bcrypt.compare(password, user.password, (err, isMatch) => {
               if (err) {
                 return done(err);
               }
               if (!isMatch) {
+                console.log("I am here");
                 return done(null, false, { message: "Wrong Password!" });
               }
               return done(null, user, { message: "Logged in Successfully" });
