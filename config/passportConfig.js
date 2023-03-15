@@ -41,8 +41,7 @@ const initialize = (passport) => {
         secretOrKey: process.env.SECRET_KEY,
       },
       (jwtPayload, done) => {
-        console.log("This");
-        return Author.findById(jwtPayload.id)
+        return Author.findById(jwtPayload._id)
           .then((user) => {
             return done(null, user);
           })
