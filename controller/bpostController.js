@@ -37,14 +37,27 @@ exports.bpost_post = [
       });
   },
 ];
-// const title = req.body.title;
-// const text = req.body.text;
-// const date = req.body.date;
 
 //Update blog post to publish
-exports.bpost_put_publish = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: publish bpost on PUT");
-};
+exports.bpost_put_publish = [
+  body("isPublish").trim().escape(),
+
+  (req, res, next) => {
+    console.log(req.body.isPublish);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    Bpost.findByIdAndUpdate(req.params.id, { isPublish: req.body.isPublish })
+      .then((result) => {
+        return res
+          .status(200)
+          .json({ msg: "data updated successfully", result });
+      })
+      .catch((err) => res.status(400).json({ err }));
+  },
+];
 
 //Update blog post to unpublish
 exports.bpost_put_unpublish = (req, res, next) => {
