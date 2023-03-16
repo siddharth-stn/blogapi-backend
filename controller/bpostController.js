@@ -3,7 +3,11 @@ const { body, validationResult } = require("express-validator");
 const Bpost = require("../models/bpost");
 
 exports.bpost_get = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: list bposts on GET");
+  Bpost.find()
+    .then((result) => {
+      return res.status(200).json(result);
+    })
+    .catch((err) => res.status(400).json(err));
 };
 
 //Create new blogpost
