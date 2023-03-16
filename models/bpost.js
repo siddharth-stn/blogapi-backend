@@ -21,7 +21,7 @@ BpostSchema.virtual("url").get(function () {
 
 BpostSchema.virtual("date_formatted").get(function () {
   return DateTime.fromJSDate(this.date)
-    .toFormat("dd LL yyyy")
+    .toFormat("dd/LL/yyyy")
     .toLocaleString(DateTime.DATE_SHORT);
 });
 
